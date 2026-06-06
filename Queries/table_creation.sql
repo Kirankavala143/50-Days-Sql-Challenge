@@ -45,19 +45,22 @@ use sql_challenge;
 -- as
 -- select * from departments;
 
-create table cleaned_employees
-as
-select * from employees;
+-- create table cleaned_employees
+-- as
+-- select * from employees;
 
-create table cleaned_salaries
-as
-select * from salaries;
+-- create table cleaned_salaries
+-- as
+-- select * from salaries;
 
-create table cleaned_attendance
-as
-select * from attendance;
+-- create table cleaned_attendance
+-- as
+-- select * from attendance;
 
-create table cleaned_performance
-as
-select * from performance;
+-- create table cleaned_performance
+-- as
+-- select * from performance;
+
+
+SELECT DATABASE();
 

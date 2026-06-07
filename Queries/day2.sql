@@ -53,3 +53,12 @@ or
 rating_2023 is null or rating_2023 = ''
 or
 rating_2024 is null or rating_2024 = '';
+
+
+
+
+
+
+
+
+

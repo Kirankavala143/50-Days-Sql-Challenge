@@ -64,3 +64,5 @@ use sql_challenge;
 
 SELECT DATABASE();
 
+
+

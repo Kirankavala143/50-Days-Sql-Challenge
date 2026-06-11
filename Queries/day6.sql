@@ -23,8 +23,8 @@
 -- else 0
 -- end;
 
-select * from cleaned_salaries
-where is_Outlier = 1;
+-- select * from cleaned_salaries
+-- where is_Outlier = 1;
 
 -- UPDATE cleaned_salaries
 -- SET salary = 65000
@@ -33,3 +33,4 @@ where is_Outlier = 1;
 -- UPDATE cleaned_salaries
 -- SET salary = 97000
 -- WHERE salary_id = 37;
+

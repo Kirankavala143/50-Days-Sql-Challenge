@@ -32,3 +32,5 @@ ON e.emp_id = t.emp_id;
 DROP TEMPORARY TABLE temp_sal_summary;
 
 -- Query 6 (Intentional Error)
+SELECT *
+FROM temp_sal_summary;

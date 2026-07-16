@@ -457,7 +457,7 @@ This project strengthened my SQL skills while providing hands-on experience in s
 
 # 👨‍💻 Author
 
-**Kiran Kumar**
+**Kiran Kavala**
 
 🎓 B.Tech (Artificial Intelligence & Machine Learning)
 

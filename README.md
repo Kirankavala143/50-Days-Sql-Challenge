@@ -463,11 +463,11 @@ This project strengthened my SQL skills while providing hands-on experience in s
 
 💼 Aspiring Data Analyst | SQL Developer | Python Developer
 
-📧 Email: *Add Your Email*
+📧 Email: kavalakiran98@gmail.com
 
-🔗 LinkedIn: *Add Your LinkedIn Profile*
+🔗 LinkedIn: https://www.linkedin.com/in/kiran-kavala-6b428428a
 
-🌐 GitHub: *Add Your GitHub Profile*
+🌐 GitHub: https://github.com/Kirankavala143
 
 ---
 

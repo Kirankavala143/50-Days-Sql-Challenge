@@ -1,4 +1,4 @@
-USE sql_challenge;
+-- USE sql_challenge;
 
 
 -- CREATE TABLE cleaned_customers AS
@@ -7,8 +7,9 @@ USE sql_challenge;
 -- CREATE TABLE cleaned_products AS
 -- SELECT * FROM raw_products;
 
--- CREATE TABLE cleaned_orders AS
--- SELECT * FROM raw_orders;
+CREATE TABLE cleaned_orders AS
+SELECT *
+FROM raw_orders;
 
 -- CREATE TABLE cleaned_order_details AS
 -- SELECT * FROM raw_order_details;

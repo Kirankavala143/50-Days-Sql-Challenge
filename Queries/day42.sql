@@ -1,36 +1,37 @@
 USE sql_challenge;
 
+
 -- CREATE TABLE cleaned_customers AS
 -- SELECT * FROM raw_customers;
+
+-- CREATE TABLE cleaned_products AS
+-- SELECT * FROM raw_products;
 
 -- CREATE TABLE cleaned_orders AS
 -- SELECT * FROM raw_orders;
 
--- CREATE TABLE cleaned_restaurants AS
--- SELECT * FROM raw_restaurants;
-
--- CREATE TABLE cleaned_menu_items AS
--- SELECT * FROM raw_menu_items;
-
 -- CREATE TABLE cleaned_order_details AS
 -- SELECT * FROM raw_order_details;
 
--- Clean cleaned_customers
+-- CREATE TABLE cleaned_payments AS
+-- SELECT * FROM raw_payments;
+
+
+-- Step 2: Remove Spaces
 -- UPDATE cleaned_customers
 -- SET
--- customer_id = TRIM(customer_id),
--- customer_name = TRIM(customer_name),
--- email = TRIM(email),
--- city = TRIM(city),
--- signup_date = TRIM(signup_date);
+--     customer_id = TRIM(customer_id),
+--     customer_name = TRIM(customer_name),
+--     city = TRIM(city),
+--     signup_date = TRIM(signup_date);
 
--- Standardize Text
+-- Step 3: Standardize Text
 -- UPDATE cleaned_customers
 -- SET
--- customer_name = UPPER(customer_name),
--- city = UPPER(city);
+--     customer_name = UPPER(customer_name),
+--     city = UPPER(city);
 
--- Replace NULL Values
+ -- Step 4: Replace NULL Values
 -- UPDATE cleaned_customers
 -- SET city = 'UNKNOWN'
 -- WHERE city IS NULL;
@@ -40,71 +41,156 @@ USE sql_challenge;
 -- WHERE customer_name IS NULL;
 
 -- UPDATE cleaned_customers
--- SET email = 'UNKNOWN'
--- WHERE email IS NULL;
-
--- UPDATE cleaned_customers
--- SET signup_date = '2024-01-01'
+-- SET signup_date = '01-01-2024'
 -- WHERE signup_date IS NULL;
 
--- Remove Duplicate Customers
+-- Step 5: Remove Duplicate Customers
 -- DELETE FROM cleaned_customers
--- WHERE customer_id IN
--- (
--- SELECT customer_id
--- FROM
--- (
--- SELECT customer_id,
--- ROW_NUMBER() OVER(
--- PARTITION BY customer_id
--- ORDER BY customer_id
--- ) AS rn
--- FROM cleaned_customers
--- )t
--- WHERE rn > 1
+-- WHERE customer_id IN (
+--     SELECT customer_id
+--     FROM (
+--         SELECT customer_id,
+--                ROW_NUMBER() OVER (
+--                    PARTITION BY customer_id
+--                    ORDER BY customer_id
+--                ) AS rn
+--         FROM cleaned_customers
+--     ) t
+--     WHERE rn > 1
 -- );
 
--- Step 3: Clean Orders
-UPDATE cleaned_orders
-SET
-order_id = TRIM(order_id),
-customer_id = TRIM(customer_id),
-restaurant_id = TRIM(restaurant_id),
-order_date = TRIM(order_date);
+-- 1. cleaned_products Remove Spaces
+-- UPDATE cleaned_products
+-- SET
+--     product_id = TRIM(product_id),
+--     product_name = TRIM(product_name),
+--     category = TRIM(category),
+--     price = TRIM(price);
 
-UPDATE cleaned_orders
-SET order_date='2024-01-01'
-WHERE order_date IS NULL;
+-- Standardize Text
+-- UPDATE cleaned_products
+-- SET
+--     product_name = UPPER(product_name),
+--     category = UPPER(category);
 
--- Step 4: Clean Restaurants
-UPDATE cleaned_restaurants
-SET
-restaurant_id = TRIM(restaurant_id),
-restaurant_name = TRIM(restaurant_name),
-city = TRIM(city),
-registration_date = TRIM(registration_date);
+-- Replace NULL Values
+-- UPDATE cleaned_products
+-- SET product_name = 'UNKNOWN'
+-- WHERE product_name IS NULL;
 
-UPDATE cleaned_restaurants
-SET
-restaurant_name = UPPER(restaurant_name),
-city = UPPER(city);
+-- UPDATE cleaned_products
+-- SET category = 'UNKNOWN'
+-- WHERE category IS NULL;
 
--- Step 5: Clean Menu Items
-UPDATE cleaned_menu_items
-SET
-item_id = TRIM(item_id),
-restaurant_id = TRIM(restaurant_id),
-item_name = TRIM(item_name),
-price = TRIM(price);
+-- UPDATE cleaned_products
+-- SET price = '0'
+-- WHERE price IS NULL;
 
-UPDATE cleaned_menu_items
-SET item_name = UPPER(item_name);
+-- Remove Duplicates
+-- DELETE FROM cleaned_products
+-- WHERE product_id IN (
+--     SELECT product_id
+--     FROM (
+--         SELECT product_id,
+--                ROW_NUMBER() OVER(
+--                     PARTITION BY product_id
+--                     ORDER BY product_id
+--                ) rn
+--         FROM cleaned_products
+--     ) t
+--     WHERE rn > 1
+-- );
 
--- Step 6: Clean Order Details
-UPDATE cleaned_order_details
-SET
-order_detail_id = TRIM(order_detail_id),
-order_id = TRIM(order_id),
-item_id = TRIM(item_id),
-quantity = TRIM(quantity);
+-- 2. cleaned_orders Remove Spaces
+-- UPDATE cleaned_orders
+-- SET
+--     order_id = TRIM(order_id),
+--     customer_id = TRIM(customer_id),
+--     order_date = TRIM(order_date);
 
+-- Replace NULL Values
+-- UPDATE cleaned_orders
+-- SET customer_id = '0'
+-- WHERE customer_id IS NULL;
+
+-- UPDATE cleaned_orders
+-- SET order_date = '01-01-2024'
+-- WHERE order_date IS NULL;
+
+-- Remove Duplicates
+-- DELETE FROM cleaned_orders
+-- WHERE order_id IN (
+--     SELECT order_id
+--     FROM (
+--         SELECT order_id,
+--                ROW_NUMBER() OVER(
+--                     PARTITION BY order_id
+--                     ORDER BY order_id
+--                ) rn
+--         FROM cleaned_orders
+--     ) t
+--     WHERE rn > 1
+-- );
+
+-- 3. cleaned_order_details Remove Spaces
+-- UPDATE cleaned_order_details
+-- SET
+--     order_detail_id = TRIM(order_detail_id),
+--     order_id = TRIM(order_id),
+--     product_id = TRIM(product_id),
+--     quantity = TRIM(quantity);
+
+-- Replace NULL Values
+-- UPDATE cleaned_order_details
+-- SET
+--     order_detail_id = TRIM(order_detail_id),
+--     order_id = TRIM(order_id),
+--     product_id = TRIM(product_id),
+--     quantity = TRIM(quantity);
+
+--  UPDATE remove duplicates
+-- DELETE FROM cleaned_order_details
+-- WHERE order_detail_id IN (
+--     SELECT order_detail_id
+--     FROM (
+--         SELECT order_detail_id,
+--                ROW_NUMBER() OVER(
+--                     PARTITION BY order_detail_id
+--                     ORDER BY order_detail_id
+--                ) rn
+--         FROM cleaned_order_details
+--     ) t
+--     WHERE rn > 1
+-- );
+
+-- 4. cleaned_payments Remove Spaces
+-- UPDATE cleaned_payments
+-- SET
+--     payment_id = TRIM(payment_id),
+--     order_id = TRIM(order_id),
+--     payment_amount = TRIM(payment_amount),
+--     payment_date = TRIM(payment_date);
+
+-- Replace NULL Values
+-- UPDATE cleaned_payments
+-- SET payment_amount = '0'
+-- WHERE payment_amount IS NULL;
+
+-- UPDATE cleaned_payments
+-- SET payment_date = '01-01-2024'
+-- WHERE payment_date IS NULL;
+
+-- Remove Duplicates
+-- DELETE FROM cleaned_payments
+-- WHERE payment_id IN (
+--     SELECT payment_id
+--     FROM (
+--         SELECT payment_id,
+--                ROW_NUMBER() OVER(
+--                     PARTITION BY payment_id
+--                     ORDER BY payment_id
+--                ) rn
+--         FROM cleaned_payments
+--     ) t
+--     WHERE rn > 1
+-- );
